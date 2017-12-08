@@ -22,8 +22,10 @@ Common Airlines
 
 [Full list](https://en.wikipedia.org/wiki/List_of_airline_codes)
 
+![Flow Chart](https://github.com/colinhalebrown/Flight-Tracker/blob/master/images/flowchart.png)
+
 # Installation Tutorial
-This tool is made for python 2.7, mileage may vary. 
+This tool is made for python 2.7.14, mileage may vary. 
 
 ## Install Needed Liberaries
 Open your virtual enviroment or what ever instance of python you intend on using and install the two liberaries BeautifulSoup4 and Keyboard.  
@@ -40,6 +42,10 @@ In whatever instane of python you have installed the liberaries in [download](ht
 In your virtual enviroment run flighttracker.py.
 
 ![console](https://github.com/colinhalebrown/Flight-Tracker/blob/master/images/run.gif)
+
+```console
+python flighttracker.py
+```
 
 ## Input your flight & check time
 First it will ask for your flight code. This code is in ICAO format, two parts the airlines and the flight number seperated by a hyphen. 
