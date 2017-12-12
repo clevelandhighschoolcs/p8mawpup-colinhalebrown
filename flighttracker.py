@@ -7,8 +7,8 @@ from datetime import date
 from twilio.rest import Client # pip install twilio
 
 # Your Account SID & Auth Token from twilio.com/console
-account_sid = "AC509d5fba13bf7e990d5d7925d4639a39"
-auth_token  = "7151508e9bf41aeb23c4d3c610a1d586"
+account_sid = "XXX"
+auth_token  = "XXX"
 
 client = Client(account_sid, auth_token)
 
@@ -25,8 +25,8 @@ def track():
  flight = flight_box.text.strip()
  
  message = client.messages.create(
-    to="+19712011367", 
-    from_="+15312016897",
+    to="#", 
+    from_="#",
     body=flight + ' ' + status)
  
  print flight + ' ' + status
