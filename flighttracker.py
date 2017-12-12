@@ -4,10 +4,17 @@ import keyboard #pip install keyboard
 import urllib2 
 import threading
 from datetime import date
+from twilio.rest import Client # pip install twilio
+
+# Your Account SID & Auth Token from twilio.com/console
+account_sid = "AC509d5fba13bf7e990d5d7925d4639a39"
+auth_token  = "7151508e9bf41aeb23c4d3c610a1d586"
+
+client = Client(account_sid, auth_token)
 
 def track():
- if seconds > 0:
-  clock = threading.Timer(seconds, track)
+ if minutes > 0:
+  clock = threading.Timer(minutes, track)
   clock.start()
  webPage = urllib2.urlopen(url)
 # print str(webPage.getcode())
@@ -16,8 +23,15 @@ def track():
  status = status_box.text.strip()
  flight_box = soup.find('div', {'class' : 'col col-6-12'})
  flight = flight_box.text.strip()
+ 
+ message = client.messages.create(
+    to="+19712011367", 
+    from_="+15312016897",
+    body=flight + ' ' + status)
+ 
  print flight + ' ' + status
- if seconds > 0:
+ print(message.sid)
+ if minutes > 0:
   while True:
     if keyboard.is_pressed('escape'):
      clock.cancel()
@@ -26,15 +40,15 @@ def track():
 def var():
  today = date.today()
  flightnum = raw_input('Enter airline ICAO code - flight number: ')
- global seconds 
- seconds = input('How often do you want to check? (seconds): ')
+ global minutes 
+ minutes = input('How often do you want to check? (minutes): ') * 60
  global url 
  url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
- print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds'
-# print url
+ print 'Checking for flight ' + flightnum + ' every ' + str(minutes / 60)+ ' minutes'
+ print url
 # print today
 # print flightnum
-# print seconds
+# print minutes
  track()
 
 var()

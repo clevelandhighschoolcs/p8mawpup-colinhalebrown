@@ -32,6 +32,7 @@ Open your virtual enviroment or what ever instance of python you intend on using
 ```python
 pip install bs4
 pip install keyboard
+pip install twilio
 ```
 ## [Download](https://github.com/colinhalebrown/Flight-Tracker/archive/master.zip) the Code
 In whatever instane of python you have installed the liberaries in [download](https://github.com/colinhalebrown/Flight-Tracker/archive/master.zip) or [clone](https://github.com/colinhalebrown/Flight-Tracker.git) and move the flighttracker.py to that destination.
