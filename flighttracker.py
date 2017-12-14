@@ -4,13 +4,13 @@ from datetime import date
 
 
 class Tracker():
+  """Class which scarpes data on air flights."""
   
   def __init__(self, seconds, flightnum, url):
     self.sloppy = True
     self.url = url
     self.flightnum = flightnum
     self.seconds = float(seconds)
-    print self.seconds
     self.track()
 
   def ok(self):
@@ -51,7 +51,7 @@ def main():
     flightnum = raw_input('Enter airline ICAO code - flight number: ')
     seconds = input('How often do you want to check? (seconds): ')
   url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
-  print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds'
+  print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds.\n press ESC to exit.'
   Thing = Tracker(seconds, flightnum, url)
 
 if __name__ == "__main__":
