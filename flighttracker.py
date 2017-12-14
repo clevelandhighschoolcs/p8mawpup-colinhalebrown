@@ -1,40 +1,64 @@
-#import libraries
-from bs4 import BeautifulSoup #pip install bs4
-import keyboard #pip install keyboard
-import urllib2 
-import threading
+from bs4 import BeautifulSoup
+import keyboard, urllib2, time, sys, threading
 from datetime import date
 
-def track():
- if seconds > 0:
-  clock = threading.Timer(seconds, track)
-  clock.start()
- webPage = urllib2.urlopen(url)
-# print str(webPage.getcode())
- soup = BeautifulSoup(webPage, 'html.parser')
- status_box = soup.find('div', {'class' : 'keel-grid statusSubHeadline'})
- status = status_box.text.strip()
- flight_box = soup.find('div', {'class' : 'col col-6-12'})
- flight = flight_box.text.strip()
- print flight + ' ' + status
- if seconds > 0:
-  while True:
-    if keyboard.is_pressed('escape'):
-     clock.cancel()
-     break
 
-def var():
- today = date.today()
- flightnum = raw_input('Enter airline ICAO code - flight number: ')
- global seconds 
- seconds = input('How often do you want to check? (seconds): ')
- global url 
- url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
- print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds'
-# print url
-# print today
-# print flightnum
-# print seconds
- track()
+class Tracker():
+  
+  def __init__(self, seconds, flightnum, url):
+    self.sloppy = True
+    self.url = url
+    self.flightnum = flightnum
+    self.seconds = float(seconds)
+    print self.seconds
+    self.track()
 
-var()
+  def ok(self):
+    self.sloppy = True
+    #print("Changed sloppy")
+
+  def track(self):
+    """Tracks flight"""
+    #print "run"
+    while keyboard.is_pressed('escape') != True:
+      if self.sloppy == True:
+        #print "shouldn't be running.."
+        webPage = urllib2.urlopen(self.url)
+        # print str(webPage.getcode())
+        soup = BeautifulSoup(webPage, 'html.parser')
+        status_box = soup.find('div', {'class' : 'keel-grid statusSubHeadline'})
+        status = status_box.text.strip()
+        flight_box = soup.find('div', {'class' : 'col col-6-12'})
+        flight = flight_box.text.strip()
+        print flight + ' ' + status
+        self.sloppy = False
+        Go = threading.Timer(self.seconds, self.ok)
+        Go.start()
+        #print 'EOL'
+    #print "oh fuck"
+    Go.cancel()
+    sys.exit()
+
+
+
+def main():
+  """
+  Defines variables for the tracking 
+  Example usage: flighttracker.py [code] [seconds]
+  """
+  today = date.today()
+  if len(sys.argv) > 1:
+    flightnum = sys.argv[1]
+    if len(sys.argv) > 2:
+      seconds = sys.argv[2]
+    else:
+      seconds = input("How often do you want to check? (seconds): ")
+  else:
+    flightnum = raw_input('Enter airline ICAO code - flight number: ')
+    seconds = input('How often do you want to check? (seconds): ')
+  url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
+  print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds'
+  Baby = Tracker(seconds, flightnum, url)
+
+if __name__ == "__main__":
+  main()
