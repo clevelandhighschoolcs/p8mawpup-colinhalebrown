@@ -15,16 +15,12 @@ class Tracker():
 
   def ok(self):
     self.sloppy = True
-    #print("Changed sloppy")
 
   def track(self):
     """Tracks flight"""
-    #print "run"
     while keyboard.is_pressed('escape') != True:
       if self.sloppy == True:
-        #print "shouldn't be running.."
         webPage = urllib2.urlopen(self.url)
-        # print str(webPage.getcode())
         soup = BeautifulSoup(webPage, 'html.parser')
         status_box = soup.find('div', {'class' : 'keel-grid statusSubHeadline'})
         status = status_box.text.strip()
@@ -34,8 +30,6 @@ class Tracker():
         self.sloppy = False
         Go = threading.Timer(self.seconds, self.ok)
         Go.start()
-        #print 'EOL'
-    #print "oh fuck"
     Go.cancel()
     sys.exit()
 
@@ -58,7 +52,7 @@ def main():
     seconds = input('How often do you want to check? (seconds): ')
   url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
   print 'Checking for flight ' + flightnum + ' every ' + str(seconds) + ' seconds'
-  Baby = Tracker(seconds, flightnum, url)
+  Thing = Tracker(seconds, flightnum, url)
 
 if __name__ == "__main__":
   main()
