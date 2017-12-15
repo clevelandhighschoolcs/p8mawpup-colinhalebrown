@@ -4,7 +4,7 @@ from datetime import date
 
 
 class Tracker():
-  """Class which scarpes data on air flights."""
+  """Class which scrapes data on air flights."""
   
   def __init__(self, seconds, flightnum, url):
     self.sloppy = True
