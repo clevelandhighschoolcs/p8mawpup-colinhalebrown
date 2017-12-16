@@ -3,8 +3,8 @@ from twilio.rest import Client
 import keyboard, urllib2, time, sys, threading
 from datetime import date
 
-account_sid = 'AC509d5fba13bf7e990d5d7925d4639a39'
-auth_token  = '7151508e9bf41aeb23c4d3c610a1d586'
+account_sid = 'xxx'
+auth_token  = 'xxx'
 
 client = Client(account_sid, auth_token)
 
@@ -32,8 +32,8 @@ class Tracker():
         flight_box = soup.find('div', {'class' : 'col col-6-12'})
         flight = flight_box.text.strip()
         message = client.messages.create(
-         to='9712011367', 
-         from_='5312016897',
+         to='xxx', 
+         from_='xxx',
          body=flight + ' ' + status)
         print flight + ' ' + status
         print(message.sid)
