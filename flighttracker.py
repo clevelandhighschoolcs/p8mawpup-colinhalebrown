@@ -63,7 +63,7 @@ def main():
   url = 'https://www.kayak.com/tracker/' + flightnum + '/' + str(today)
   client = Client(account_sid, auth_token)
   print 'Checking for flight ' + flightnum + ' every ' + str(minutes) + ' minutes. press ESC to exit.'
-  print 'Sending flight updates to ' + phonenum + 'from ' + twilionum
+  print 'Sending flight updates to ' + str(phonenum) + ' from ' + str(twilionum)
   Thing = Tracker(minutes, flightnum, url, client, twilionum, phonenum)
 
 if __name__ == "__main__":
