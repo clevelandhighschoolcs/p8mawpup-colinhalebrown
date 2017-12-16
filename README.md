@@ -75,3 +75,6 @@ After You have put in your airline code input how often you want it to check the
 
 # Common Errors
 If the flight ICAO code or flight number are noT accociated with an actual flight it will check and give a large error code every few seconds. 
+
+#Big Thanks to Free Code Camp
+I used their tutorial to learn BeautifulSoup it can be four [HERE](https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe)
