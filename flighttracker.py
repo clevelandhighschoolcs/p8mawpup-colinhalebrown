@@ -38,8 +38,8 @@ class Tracker():
         self.sloppy = False
         Go = threading.Timer(self.minutes * 60, self.ok)
         Go.start()
-    Go.cancel()
-    sys.exit()
+        Go.cancel()
+        sys.exit()
 
 def main():
   """
